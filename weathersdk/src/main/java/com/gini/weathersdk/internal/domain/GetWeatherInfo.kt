@@ -81,7 +81,7 @@ internal class GetWeatherInfoImpl(private val weatherRepository:WeatherRepositor
         val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
         return try {
             dateFormatter.parse(timestamp)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Date()
         }
     }

@@ -1,4 +1,4 @@
-package com.gini.weathersdk;
+package com.gini.weathersdk
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async

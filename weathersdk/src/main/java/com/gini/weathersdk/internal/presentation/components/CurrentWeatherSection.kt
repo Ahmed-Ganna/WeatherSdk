@@ -1,4 +1,4 @@
-package com.gini.weathersdk.internal.presentation.components;
+package com.gini.weathersdk.internal.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

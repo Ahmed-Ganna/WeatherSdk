@@ -1,4 +1,4 @@
-package com.gini.weathersdk.example;
+package com.gini.weathersdk.example
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.gini.weathersdk.internal.presentation.model;
+package com.gini.weathersdk.internal.presentation.model
 
 
 /**

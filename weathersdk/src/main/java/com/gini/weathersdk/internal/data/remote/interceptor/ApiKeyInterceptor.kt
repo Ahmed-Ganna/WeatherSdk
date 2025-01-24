@@ -1,6 +1,6 @@
-package com.gini.weathersdk.internal.data.remote.interceptor;
+package com.gini.weathersdk.internal.data.remote.interceptor
 
-import okhttp3.Interceptor;
+import okhttp3.Interceptor
 import okhttp3.Response
 
 /**

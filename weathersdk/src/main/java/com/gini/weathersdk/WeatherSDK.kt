@@ -1,4 +1,4 @@
-package com.gini.weathersdk;
+package com.gini.weathersdk
 
 import com.gini.weathersdk.internal.presentation.WeatherFragment
 import com.gini.weathersdk.internal.sl.RealServiceLocator

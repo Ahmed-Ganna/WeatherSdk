@@ -1,4 +1,4 @@
-package com.gini.weathersdk;
+package com.gini.weathersdk
 
 import com.gini.weathersdk.internal.data.dto.CurrentWeatherResponse
 import com.gini.weathersdk.internal.data.dto.HourlyForecastResponse
