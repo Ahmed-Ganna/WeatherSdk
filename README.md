@@ -19,6 +19,7 @@ The Weather SDK is a powerful tool for integrating weather data into your Androi
 - [Event Types](#event-types)
 - [Configuration](#configuration)
 - [Error Handling](#error-handling)
+- [Documentation](#documentation)
 - [License](#license)
 
 ---
@@ -104,7 +105,7 @@ The SDK emits the following event types:
 
 2. **`OnFinishedWithError`**  
    Emitted when an error occurs, and the weather fragment is dismissed.
-    - **Property:** `e: Throwable` — The exception describing the error.
+   - **Property:** `e: Throwable` — The exception describing the error.
 
 ---
 
@@ -130,6 +131,16 @@ val config = WeatherSDK.Config(cityName = "Berlin")
 
 - If the `cityName` parameter in the configuration is blank, an `IllegalStateException` will be thrown.
 - Subscribe to the `eventsFlow` to handle errors using the `OnFinishedWithError` event.
+
+---
+
+## Documentation
+
+You can build the Dokka documentation for the Weather SDK using the following command:
+
+```bash
+./gradlew weathersdk:dokkaHtml
+```
 
 ---
 
