@@ -1,0 +1,6 @@
+<resources>
+    <string name="wsdk_fragment_title">24 Hours forecast</string>
+    <string name="wsdk_fragment_subtitle">The weather in %s is:</string>
+    <string name="wsdk_temp">%s℃</string>
+    <string name="wsdk_local_time" >"AT %s LOCAL TIME"</string>
+</resources>

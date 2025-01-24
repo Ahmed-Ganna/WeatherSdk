@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Example App</string>
+    <string name="enter_city_name">Enter a city name for the weather forecast</string>
+    <string name="button_forecast">Weather Forecast</string>
+    <string name="city_name_label">City Name</string>
+</resources>
