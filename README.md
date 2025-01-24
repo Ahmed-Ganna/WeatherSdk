@@ -1,6 +1,6 @@
 # Weather SDK
 
-The Weather SDK is a powerful tool for integrating weather data into your Android application. It allows you to create weather fragments and handle events such as successful completions or errors.
+The Weather SDK is a powerful tool for integrating weather data into your Android application.
 
 ## Features
 
