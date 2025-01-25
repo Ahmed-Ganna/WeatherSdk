@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.gini.weathersdk.WeatherSDK
@@ -17,9 +19,14 @@ import kotlinx.coroutines.launch
 
 class ExampleActivity : AppCompatActivity() {
 
-    private val viewModel : ExampleViewModel by viewModels()
-
-    private val sdk = WeatherSDK("6ac62e830e334742924401be0e80573d")
+    private val viewModel : ExampleViewModel by viewModels(){
+        object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return ExampleViewModel(WeatherSDK("6ac62e830e334742924401be0e80573d")) as T
+            }
+        }
+    }
 
     private lateinit var binding: ActivityExampleBinding
 
@@ -46,7 +53,7 @@ class ExampleActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    sdk.eventsFlow.collect { event ->
+                    viewModel.sdk.eventsFlow.collect { event ->
                         when (event) {
                             is WeatherSDK.WeatherSDKEvents.OnFinished -> Unit
 
@@ -66,7 +73,7 @@ class ExampleActivity : AppCompatActivity() {
     }
 
     private fun showSdkFragment(cityName: String) {
-        val fragment = sdk.createFragment(WeatherSDK.Config(cityName))
+        val fragment = viewModel.sdk.createFragment(WeatherSDK.Config(cityName))
 
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)

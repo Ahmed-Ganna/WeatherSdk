@@ -1,4 +1,4 @@
-package com.gini.weathersdk.internal.sl
+package com.gini.weathersdk.internal.di
 
 import com.gini.weathersdk.internal.data.repo.WeatherRepository
 

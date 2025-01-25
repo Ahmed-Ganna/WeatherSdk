@@ -1,4 +1,4 @@
-package com.gini.weathersdk.internal.sl
+package com.gini.weathersdk.internal.di
 
 
 import com.gini.weathersdk.internal.data.remote.WeatherApi
@@ -36,7 +36,7 @@ import kotlin.jvm.java
  */
 internal class RealServiceLocator(private val apikey: String) : ServiceLocator {
 
-    private val retrofit: Retrofit by lazy {
+    private fun retrofit(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor)
@@ -48,23 +48,20 @@ internal class RealServiceLocator(private val apikey: String) : ServiceLocator {
             isLenient = true
         }
 
-        Retrofit.Builder()
+        return Retrofit.Builder()
             .baseUrl("https://api.weatherbit.io/v2.0/")
             .client(client)
             .addConverterFactory(networkJson.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
-    private val adsApi: WeatherApi by lazy {
-        retrofit.create(WeatherApi::class.java)
+    private fun adsApi() : WeatherApi {
+        return retrofit().create(WeatherApi::class.java)
     }
 
-    private val repository: WeatherRepositoryImpl by lazy {
-        WeatherRepositoryImpl(WeatherRemoteDataSource(adsApi))
-    }
 
     override fun getRepository(): WeatherRepository {
-        return repository
+        return WeatherRepositoryImpl(WeatherRemoteDataSource(adsApi()))
     }
 
 

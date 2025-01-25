@@ -1,8 +1,8 @@
 package com.gini.weathersdk
 
+import com.gini.weathersdk.internal.di.RealServiceLocator
+import com.gini.weathersdk.internal.di.ServiceLocator
 import com.gini.weathersdk.internal.presentation.WeatherFragment
-import com.gini.weathersdk.internal.sl.RealServiceLocator
-import com.gini.weathersdk.internal.sl.ServiceLocator
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
@@ -16,9 +16,8 @@ import kotlinx.coroutines.flow.SharedFlow
  */
 class WeatherSDK (private val apiKey: String) {
 
-    internal val serviceLocator: ServiceLocator by lazy {
-        RealServiceLocator(apiKey)
-    }
+    internal val serviceLocator: ServiceLocator
+        get() = RealServiceLocator(apiKey)
 
     /**
      * A private mutable shared flow used to emit events related to the Weather SDK.
