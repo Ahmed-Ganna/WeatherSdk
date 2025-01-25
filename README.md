@@ -14,7 +14,6 @@ The Weather SDK is a powerful tool for integrating weather data into your Androi
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Creating a Weather Fragment](#creating-a-weather-fragment)
 - [Listening for Events](#listening-for-events)
 - [Event Types](#event-types)
 - [Configuration](#configuration)
@@ -48,9 +47,8 @@ Create an instance of the `WeatherSDK` class by passing your API key.
 val weatherSDK = WeatherSDK(apiKey = "YOUR_API_KEY")
 ```
 
----
 
-## Creating a Weather Fragment
+### Step 2: Create a Weather Fragment
 
 You can create a weather fragment using the `createFragment` method. Pass a configuration object containing the city name.
 
@@ -141,6 +139,8 @@ You can build the Dokka documentation for the Weather SDK using the following co
 ```bash
 ./gradlew weathersdk:dokkaHtml
 ```
+
+The generated documentation can be found under `weathersdk/build/documentation`.
 
 ---
 
