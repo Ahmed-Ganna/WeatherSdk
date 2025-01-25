@@ -11,24 +11,16 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * Interface for retrieving weather information for a given city.
- */
-internal interface GetWeatherInfo{
-    suspend operator fun invoke(city: String): Result<GetWeatherInfoResult>
-}
 
 /**
- * Implementation of the [GetWeatherInfo] interface.
- *
  * This class is responsible for fetching and processing weather data for a given city.
  * It retrieves both current weather conditions and a 24-hour hourly forecast.
  *
  * @property weatherRepository The repository responsible for fetching weather data from an external source.
  */
-internal class GetWeatherInfoImpl(private val weatherRepository:WeatherRepository) : GetWeatherInfo {
+internal class GetWeatherInfoUseCase(private val weatherRepository:WeatherRepository) {
 
-    override suspend operator fun invoke(city: String): Result<GetWeatherInfoResult> {
+    suspend operator fun invoke(city: String): Result<GetWeatherInfoResult> {
         return try {
             coroutineScope {
                 val currentWeatherDeferred = async { weatherRepository.getCurrentWeather(city) }

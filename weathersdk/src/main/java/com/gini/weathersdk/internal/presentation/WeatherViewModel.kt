@@ -6,9 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.gini.weathersdk.WeatherSDK
 import com.gini.weathersdk.WeatherSDK.WeatherSDKEvents
-import com.gini.weathersdk.internal.domain.GetWeatherInfo
-import com.gini.weathersdk.internal.domain.GetWeatherInfoImpl
 import com.gini.weathersdk.internal.domain.GetWeatherInfoResult
+import com.gini.weathersdk.internal.domain.GetWeatherInfoUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,13 +20,13 @@ import kotlinx.coroutines.launch
  *
  * @param sdk An instance of [WeatherSDK] to interact with the underlying weather service.
  * @param sdkConfig The configuration for the [WeatherSDK], including details like the city name.
- * @param getWeatherInfo A use case for retrieving weather information based on a city name.
+ * @param getWeatherInfoUseCase A use case for retrieving weather information based on a city name.
  * @param uiMapper A mapper responsible for converting data models from the service layer to UI models.
  */
 internal class WeatherViewModel(
     private val sdk : WeatherSDK,
     private val sdkConfig: WeatherSDK.Config,
-    private val getWeatherInfo: GetWeatherInfo,
+    private val getWeatherInfoUseCase: GetWeatherInfoUseCase,
     private val uiMapper: WeatherUiMapper
 ): ViewModel() {
 
@@ -41,7 +40,7 @@ internal class WeatherViewModel(
         viewModelScope.launch(CoroutineExceptionHandler { _, throwable ->
             onError(throwable)
         }){
-            val result : Result<GetWeatherInfoResult> = getWeatherInfo(sdkConfig.cityName)
+            val result : Result<GetWeatherInfoResult> = getWeatherInfoUseCase(sdkConfig.cityName)
             result.onSuccess {
                 onSuccess(it)
             }
@@ -112,7 +111,7 @@ internal class WeatherViewModelFactory (private val sdk : WeatherSDK, private va
         return WeatherViewModel(
             sdk = sdk,
             sdkConfig = sdkConfig,
-            getWeatherInfo = GetWeatherInfoImpl(sdk.serviceLocator.getRepository()),
+            getWeatherInfoUseCase = GetWeatherInfoUseCase(sdk.serviceLocator.getRepository()),
             uiMapper = WeatherUiMapper()
         ).apply {
             initialize()

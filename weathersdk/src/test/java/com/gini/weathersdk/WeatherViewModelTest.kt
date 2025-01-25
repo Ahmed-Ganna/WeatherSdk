@@ -1,7 +1,7 @@
 package com.gini.weathersdk
 
 import com.gini.weathersdk.WeatherSDK.WeatherSDKEvents
-import com.gini.weathersdk.internal.domain.GetWeatherInfo
+import com.gini.weathersdk.internal.domain.GetWeatherInfoUseCase
 import com.gini.weathersdk.internal.presentation.WeatherUiMapper
 import com.gini.weathersdk.internal.presentation.WeatherUiState
 import com.gini.weathersdk.internal.presentation.WeatherViewModel
@@ -28,7 +28,7 @@ internal class WeatherViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     @Mock
-    private lateinit var getWeatherInfo: GetWeatherInfo
+    private lateinit var getWeatherInfoUseCase: GetWeatherInfoUseCase
     @Mock
     private lateinit var sdk : WeatherSDK
 
@@ -46,10 +46,10 @@ internal class WeatherViewModelTest {
 
         val mockedUiModel = mock<WeatherInfoUiModel>()
 
-        whenever(getWeatherInfo.invoke(any())).thenReturn(Result.success(mock()))
+        whenever(getWeatherInfoUseCase.invoke(any())).thenReturn(Result.success(mock()))
         whenever(uiMapper.toUiModel(any())).thenReturn(mockedUiModel)
 
-        var viewModel = WeatherViewModel(mock(), sdkConfig,getWeatherInfo,uiMapper)
+        var viewModel = WeatherViewModel(mock(), sdkConfig,getWeatherInfoUseCase,uiMapper)
 
         assertEquals(viewModel.uiState.value,WeatherUiState.Loading)
 
@@ -64,9 +64,9 @@ internal class WeatherViewModelTest {
 
         val exception = Exception("Network error")
 
-        whenever(getWeatherInfo.invoke(any())).thenReturn(Result.failure(exception))
+        whenever(getWeatherInfoUseCase.invoke(any())).thenReturn(Result.failure(exception))
 
-        var viewModel = WeatherViewModel(sdk, sdkConfig,getWeatherInfo,mock())
+        var viewModel = WeatherViewModel(sdk, sdkConfig,getWeatherInfoUseCase,mock())
 
         assertEquals(viewModel.uiState.value,WeatherUiState.Loading)
 
@@ -83,7 +83,7 @@ internal class WeatherViewModelTest {
 
     @Test
     fun sdkEmitsOnFinishedWhenOnBackClickIsCalled() = runTest {
-        var viewModel = WeatherViewModel(sdk, sdkConfig,getWeatherInfo,mock())
+        var viewModel = WeatherViewModel(sdk, sdkConfig,getWeatherInfoUseCase,mock())
 
         viewModel.onBackClick()
 
