@@ -4,9 +4,8 @@ The Weather SDK is a powerful tool for integrating weather data into your Androi
 
 ## Features
 
-- Create customizable weather fragments.
-- Handle events emitted by the SDK, such as `OnFinished` and `OnFinishedWithError`.
-- Easily configurable with a simple API key and city name.
+- Current Weather Data: Retrieve real-time weather information for any city, displayed on the Forecast Screen.
+- Hourly Forecast: View an accurate hourly weather forecast for the next 24 hours, starting from the next full hour. For example, if the current time is 19:01, the first forecast hour displayed will be 20:00.
 
 ---
 
