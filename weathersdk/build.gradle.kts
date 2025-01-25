@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -64,6 +65,17 @@ dependencies {
 
 
     debugImplementation(libs.androidx.ui.tooling)
+}
 
-
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = android.namespace
+                artifactId = "weathersdk"
+                version = "1.0"
+            }
+        }
+    }
 }
