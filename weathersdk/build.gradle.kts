@@ -35,6 +35,10 @@ android {
     }
 }
 
+tasks.dokkaHtml {
+    outputDirectory.set(layout.buildDirectory.dir("documentation"))
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
