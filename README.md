@@ -19,6 +19,7 @@ The Weather SDK is a powerful tool for integrating weather data into your Androi
 - [Configuration](#configuration)
 - [Error Handling](#error-handling)
 - [Documentation](#documentation)
+- [Architecture](#architecture)
 - [License](#license)
 
 ---
@@ -141,6 +142,12 @@ You can build the Dokka documentation for the Weather SDK using the following co
 ```
 
 The generated documentation can be found under `weathersdk/build/documentation`.
+
+---
+
+## Architecture
+
+![Project Architecture](./arch.png)
 
 ---
 
