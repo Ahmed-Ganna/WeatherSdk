@@ -29,7 +29,7 @@ Add the Weather SDK dependency to your project. Replace `x.x.x` with the latest 
 
 ```gradle
 dependencies {
-    implementation "com.github.Ahmed-Ganna:WeatherSdk:v1.0"
+    implementation "com.github.Ahmed-Ganna:WeatherSdk:x.x.x"
 }
 ```
 
