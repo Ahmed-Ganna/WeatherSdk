@@ -1,10 +1,32 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+val keystoreProperties = Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
 android {
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["RELEASE_KEY_ALIAS"] as String
+            keyPassword = keystoreProperties["RELEASE_STORE_PASSWORD"] as String
+            storeFile = file(keystoreProperties["RELEASE_STORE_FILE"] as String)
+            storePassword = keystoreProperties["RELEASE_KEY_PASSWORD"] as String
+        }
+    }
     namespace = "com.gini.weathersdk.example"
     compileSdk = 35
 
